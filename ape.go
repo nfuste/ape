@@ -4,7 +4,13 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"strings"
 )
+
+type ficha struct {
+	zona   float64
+	precio float64
+}
 
 func main() {
 	url := "http://fotocasa.es"
@@ -25,4 +31,7 @@ func main() {
 	}
 	// show the HTML code as a string %s
 	fmt.Printf("%s\n", html)
+
+	// Test strings
+	fmt.Println(strings.Contains("Vivo en Toledo", "Toledo"))
 }
