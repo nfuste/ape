@@ -2,36 +2,25 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
-	"net/http"
-	"strings"
+
+	"github.com/PuerkitoBio/goquery"
 )
 
-type ficha struct {
-	zona   float64
-	precio float64
+func printInfo(i int, s *goquery.Selection) {
+	href, _ := s.Attr("href")
+	fmt.Printf("%s\n(%s)\n\n", s.Text(), href)
 }
 
 func main() {
-	url := "http://fotocasa.es"
-	fmt.Printf("HTML code of %s ...\n", url)
-	resp, err := http.Get(url)
-	// handle the error if there is one
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-	// do this now so it won't be forgotten
-	defer resp.Body.Close()
-	// reads html as a slice of bytes
-	html, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-	// show the HTML code as a string %s
-	fmt.Printf("%s\n", html)
 
-	// Test strings
-	fmt.Println(strings.Contains("Vivo en Toledo", "Toledo"))
+	doc, err := goquery.NewDocument("http://www.fotocasa.es/es/comprar/casas/castelldefels/zona-platja/l?maxPrice=350000&minRooms=3&minSurface=80")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	doc.Find(".re-Card-link").Each(printInfo)
+
 }
+
+// mirar https://developers.google.com/sheets/api/quickstart/go?authuser=1
