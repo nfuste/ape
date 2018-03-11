@@ -26,6 +26,7 @@ func printInfo(i int, s *goquery.Selection) {
 
 func main() {
 
+	// Coge la información de la URL que queremos:
 	doc, err := goquery.NewDocument("http://www.fotocasa.es/es/comprar/casas/castelldefels/zona-platja/l?maxPrice=350000&minRooms=3&minSurface=80")
 	if err != nil {
 		fmt.Println(err)
@@ -56,11 +57,23 @@ func main() {
 		log.Fatalf("Unable to retrieve Sheets Client %v", err)
 	}
 
+	spreadsheetID := "1w8DHMYVf7_P4t-CfxD8RUJ-ntGplEpxBrdd6QdtNnWs"
+	writeRange := "1!A5"
+
+	var vr sheets.ValueRange
+
+	myval := []interface{}{"One", "Two", "Three"}
+	vr.Values = append(vr.Values, myval)
+
+	_, err = srv.Spreadsheets.Values.Update(spreadsheetID, writeRange, &vr).ValueInputOption("RAW").Do()
+	if err != nil {
+		log.Fatalf("Unable to retrieve data from sheet. %v", err)
+	}
+
 	// Prints the names and majors of students in a sample spreadsheet:
 	// https://docs.google.com/spreadsheets/d/1w8DHMYVf7_P4t-CfxD8RUJ-ntGplEpxBrdd6QdtNnWs/edit
-	spreadsheetId := "1w8DHMYVf7_P4t-CfxD8RUJ-ntGplEpxBrdd6QdtNnWs"
 	readRange := "Class Data!A2:E"
-	resp, err := srv.Spreadsheets.Values.Get(spreadsheetId, readRange).Do()
+	resp, err := srv.Spreadsheets.Values.Get(spreadsheetID, readRange).Do()
 	if err != nil {
 		log.Fatalf("Unable to retrieve data from sheet. %v", err)
 	}
