@@ -161,3 +161,5 @@ func saveToken(file string, token *oauth2.Token) {
 	defer f.Close()
 	json.NewEncoder(f).Encode(token)
 }
+
+// https://stackoverflow.com/questions/39691100/golang-google-sheets-api-v4-write-update-example
