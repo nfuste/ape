@@ -35,6 +35,15 @@ func main() {
 
 	doc.Find(".re-Card-link").Each(printInfo)
 
+	// Coge la información de Idealista:
+	doc2, err := goquery.NewDocument("https://www.idealista.com/areas/venta-viviendas/con-precio-hasta_360000,chalets,casas-de-pueblo,duplex,aticos,de-tres-dormitorios,de-cuatro-cinco-habitaciones-o-mas,dos-banos,tres-banos-o-mas/?shape=%28%28efzzFwjyJuHwByE%7D_A%7By%40zKiNwn%40r%5B_N~Y%7Bp%40rDuPkZq%5C%7DOyw%40yToy%40zu%40cHlEyJe%40moApYr%40rBloDfDh%7DF%29%29")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	doc2.Find(".item-info-container").Each(printInfo)
+
 	// This was in the Google Sheets example:
 
 	ctx := context.Background()
