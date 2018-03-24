@@ -13,7 +13,6 @@ func printInfo(i int, s *goquery.Selection) {
 }
 
 func sayHello(w http.ResponseWriter, r *http.Request) {
-
 	fmt.Fprintf(w, `<h1>Hola!</h1>
 <p>Aquí estan les teves cerques:</p>`)
 
@@ -21,9 +20,10 @@ func sayHello(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 
-	// Primero, el server:
+	//Primero, el server:
 	http.HandleFunc("/", sayHello)
-	if err := http.ListenAndServe(":8888", nil); err != nil {
+	err := http.ListenAndServe(":8888", nil)
+	if err != nil {
 		fmt.Println(err)
 	}
 
