@@ -6,8 +6,9 @@ import (
 )
 
 func sayHello(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, `<h1>Hola!</h1>
-<p>Aquí estan les teves cerques:</p>`)
+	fmt.Fprintf(w, `<h1>Hey there!</h1>
+<p>This is a test</p>`)
+	fmt.Printf(Data)
 
 }
 

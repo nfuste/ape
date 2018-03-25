@@ -18,5 +18,7 @@ func informacioFotocasa() {
 		return
 	}
 
-	doc.Find(".re-Card-link").Each(printInfo)
+	Data := doc.Find(".re-Card-link").Each(printInfo)
+
+	fmt.Println(Data)
 }
